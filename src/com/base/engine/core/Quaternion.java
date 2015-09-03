@@ -37,6 +37,52 @@ public class Quaternion extends Vector
 	}
 	
 	
+	public Quaternion(Matrix rot) {
+		float trace = rot.get(0, 0) + rot.get(1, 1) + rot.get(2, 2);
+
+		if(trace > 0)
+		{
+			float s = 0.5f / (float)Math.sqrt(trace+ 1.0f);
+			v[3] = 0.25f / s;
+			v[0] = (rot.get(1, 2) - rot.get(2, 1)) * s;
+			v[1] = (rot.get(2, 0) - rot.get(0, 2)) * s;
+			v[2] = (rot.get(0, 1) - rot.get(1, 0)) * s;
+		}
+		else
+		{
+			if(rot.get(0, 0) > rot.get(1, 1) && rot.get(0, 0) > rot.get(2, 2))
+			{
+				float s = 2.0f * (float)Math.sqrt(1.0f + rot.get(0, 0) - rot.get(1, 1) - rot.get(2, 2));
+				v[3] = (rot.get(1, 2) - rot.get(2, 1)) / s;
+				v[0] = 0.25f * s;
+				v[1] = (rot.get(1, 0) + rot.get(0, 1)) / s;
+				v[2] = (rot.get(2, 0) + rot.get(0, 2)) / s;
+			}
+			else if(rot.get(1, 1) > rot.get(2, 2))
+			{
+				float s = 2.0f * (float)Math.sqrt(1.0f + rot.get(1, 1) - rot.get(0, 0) - rot.get(2, 2));
+				v[3] = (rot.get(2, 0) - rot.get(0, 2)) / s;
+				v[0] = (rot.get(1, 0) + rot.get(0, 1)) / s;
+				v[1] = 0.25f * s;
+				v[2] = (rot.get(2, 1) + rot.get(1, 2)) / s;
+			}
+			else
+			{
+				float s = 2.0f * (float)Math.sqrt(1.0f + rot.get(2, 2) - rot.get(0, 0) - rot.get(1, 1));
+				v[3] = (rot.get(0, 1) - rot.get(1, 0) ) / s;
+				v[0] = (rot.get(2, 0) + rot.get(0, 2) ) / s;
+				v[1] = (rot.get(1, 2) + rot.get(2, 1) ) / s;
+				v[2] = 0.25f * s;
+			}
+		}
+
+		float length = (float)Math.sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2] +v[3]*v[3]);
+		v[3] /= length;
+		v[0] /= length;
+		v[1] /= length;
+		v[2] /= length;
+	}
+
 	public Quaternion setRotation(Vector axis, float angle)
 	{
 		float cos = (float) Math.cos(angle / 2);

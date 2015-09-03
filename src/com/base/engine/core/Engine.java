@@ -5,11 +5,13 @@ public abstract class Engine implements Disposable, Priority
 	protected boolean isRunning;
 	protected PriorityList<Disposable> disposables;
 	protected int priority;
+	private byte address;
 	
 	public Engine()
 	{
 		disposables = new PriorityList<Disposable>();
 		isRunning = false;
+		address = RandomGenerator.nextByte();
 		start();
 	}
 	
@@ -39,4 +41,6 @@ public abstract class Engine implements Disposable, Priority
 	{
 		return isRunning;
 	}
+	
+	
 }

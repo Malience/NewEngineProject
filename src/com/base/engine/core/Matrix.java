@@ -358,6 +358,11 @@ public class Matrix {
 		return f;
 	}
 	
+	public float get(int x, int y)
+	{
+		return m[x][y];
+	}
+	
 	public boolean isSquare()
 	{
 		return rows == Math.sqrt(rows*cols);
