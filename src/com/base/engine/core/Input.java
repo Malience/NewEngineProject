@@ -62,15 +62,15 @@ public class Input
 	}
 	
 	
-	public static Vector2f getMousePosition()
+	public static Vector getMousePosition()
 	{
 		glfwGetCursorPos(MainWindow, mx, my);
-		return new Vector2f((float)mx.get(0), (float)my.get(0));
+		return new Vector((float)mx.get(0), (float)my.get(0));
 	}
 	
-	public static void setMousePosition(Vector2f pos)
+	public static void setMousePosition(Vector centerPosition)
 	{
-		glfwSetCursorPos(MainWindow, (double)pos.getX(), (double)pos.getY());
+		glfwSetCursorPos(MainWindow, (double)centerPosition.getX(), (double)centerPosition.getY());
 	}
 	
 	public static void setCursor(boolean enabled)

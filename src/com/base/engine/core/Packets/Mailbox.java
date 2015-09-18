@@ -1,37 +1,22 @@
 package com.base.engine.core.Packets;
 
+import java.util.ArrayList;
+
 import com.base.engine.rendering.*;
 
 public class Mailbox
 {
 	private byte address;
-	private Mail mail[];
+	//private HashMap<E, Mail> mail;
 	
-	public Mailbox(byte address, mailType m[])
+	public Mailbox(byte address)
 	{
 		this.address = address;
-		mail = new Mail[m.length];
-		for(int i = 0; i < mail.length; i++)
-		{
-			switch(m[i])
-			{
-			case texture:
-				mail[i] = new Mail<Texture>();
-				break;
-			case mesh:
-				mail[i] = new Mail<Mesh>();
-				break;
-			case request:
-				mail[i] = new Mail<Request>();
-				break;
-			}
-		}
+		//mail = new ArrayList<Mail>();
 	}
 	
-	public enum mailType
+	public <E> void addMailType()
 	{
-		texture,
-		mesh,
-		request;
+		//mail.add
 	}
 }

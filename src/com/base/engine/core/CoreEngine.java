@@ -72,4 +72,11 @@ public class CoreEngine extends Engine
 		
 		dispose();
 	}
+
+	public RenderingEngine getRenderingEngine() {
+		for(Engine engine : engines)
+			if(engine.getClass().getName() == "RenderingEngine")
+				return (RenderingEngine) engine;
+		return null;
+	}
 }
